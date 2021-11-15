@@ -36,25 +36,37 @@
                                 'title' => 'My Tasks',
                                 'meaning' => '130 / 500',
                                 'style' => '65%',
-                                'color' => 'bg-fusion-400'
+                                'color' => 'bg-fusion-400',
+                                'valuenow' => '65',
+                                'valuemin' => '0',
+                                'valuemax' => '100'
                             ],
                             [
                                 'title' => 'Transfered',
                                 'meaning' => '440 TB',
                                 'style' => '34%',
-                                'color' => 'bg-success-500'
+                                'color' => 'bg-success-500',
+                                'valuenow' => '34',
+                                'valuemin' => '0',
+                                'valuemax' => '100'
                             ],
                             [
                                 'title' => 'Bugs Squashed',
                                 'meaning' => '77%',
                                 'style' => '77%',
-                                'color' => 'bg-info-400'
+                                'color' => 'bg-info-400',
+                                'valuenow' => '77',
+                                'valuemin' => '0',
+                                'valuemax' => '100'
                             ],
                             [
                                 'title' => 'User Testing',
                                 'meaning' => '7 days',
                                 'style' => '84%',
-                                'color' => 'bg-primary-300'
+                                'color' => 'bg-primary-300',
+                                'valuenow' => '84',
+                                'valuemin' => '0',
+                                'valuemax' => '100'
                             ],
                         ]
                     ?>
@@ -66,7 +78,7 @@
                                 <span class="d-inline-block ml-auto"><?php echo $statistik['meaning']; ?></span>
                                 </div>
                                 <div class="progress progress-sm mb-3">
-                                    <div class="progress-bar <?php echo $statistik['color']; ?>" role="progressbar" style="width: <?php echo $statistik['style']; ?>;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar <?php echo $statistik['color']; ?>" role="progressbar" style="width: <?php echo $statistik['style']; ?>;" aria-valuenow="<?php echo $statistik['valuenow']; ?>" aria-valuemin="<?php echo $statistik['valuemin']; ?>" aria-valuemax="<?php echo $statistik['valuemax']; ?>"></div>
                                 </div>
                             <?php endforeach; ?>   
                             <!-- <div class="d-flex mt-2">
