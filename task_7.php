@@ -41,82 +41,23 @@ $db = mysqli_connect('localhost','root','','marlin');
                     <div class="panel-container show">
                         <div class="panel-content">
                            <div class="d-flex flex-wrap demo demo-h-spacing mt-3 mb-3">
-                           <?php $query = mysqli_query($db,"SELECT * FROM `task1`"); ?>
-                               <?php foreach($query as $result): ?>
-                                    <?php if($result['banned'] == 'off'): ?>
-                                        <div class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                                            <img src="<?php echo $result['avatar']; ?>" alt="<?php echo $result['alt']; ?>" class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                                            <div class="ml-2 mr-3">
-                                                <h5 class="m-0">
-                                                    <?php echo $result['name']." ".$result['surname']; ?>. <?php echo $result['skill']; ?>
-                                                    <small class="m-0 fw-300">
-                                                        <?php echo $result['position']; ?>
-                                                    </small>
-                                                </h5>
-                                                <a href="<?php echo $result['link_twittwer']; ?>" class="text-info fs-sm" target="_blank"><?php echo $result['twitter']; ?></a> -
-                                                <a href="<?php echo $result['link_email']; ?>" class="text-info fs-sm" target="_blank" title="Contact Sunny"><?php echo $result['email']; ?></a>
-                                            </div>
-                                        </div>
-                                    <?php endif; ?> 
-                                <?php endforeach; ?>
-
+                                <?php $query = mysqli_query($db,"SELECT * FROM `task1`"); ?>
                                 <?php foreach($query as $result): ?>
-                                <?php if($result['banned'] == 'on'): ?>
-                                    <div class="banned rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                                        <img src="<?php echo $result['avatar']; ?>" alt="<?php echo $result['alt']; ?>" class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                                        <div class="ml-2 mr-3">
-                                            <h5 class="m-0">
-                                            <?php echo $result['name']." ".$result['surname']; ?>. <?php echo $result['skill']; ?>
-                                                <small class="m-0 fw-300">
-                                                    <?php echo $result['position']; ?>
-                                                </small>
-                                            </h5>
-                                            <a href="<?php echo $result['link_twittwer']; ?>" class="text-info fs-sm" target="_blank"><?php echo $result['twitter']; ?></a> -
-                                            <a href="<?php echo $result['link_email']; ?>" class="text-info fs-sm" target="_blank" title="Contact Sunny"><?php echo $result['email']; ?></a>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>   
-                            <?php endforeach; ?>
-                            <!-- <div class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                                <img src="img/demo/authors/josh.png" alt="Jos K." class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                                <div class="ml-2 mr-3">
-                                    <h5 class="m-0">
-                                        Jos K. (ASP.NET Developer)
-                                        <small class="m-0 fw-300">
-                                            Partner &amp; Contributor
-                                        </small>
-                                    </h5>
-                                    <a href="https://twitter.com/@atlantez" class="text-info fs-sm" target="_blank">@atlantez</a> -
-                                    <a href="https://wrapbootstrap.com/user/Walapa" class="text-info fs-sm" target="_blank" title="Contact Jos"><i class="fal fa-envelope"></i></a>
-                                </div>
-                            </div> -->
-                            <!-- <div class="banned rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                                <img src="img/demo/authors/jovanni.png" alt="Jovanni Lo" class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                                <div class="ml-2 mr-3">
-                                    <h5 class="m-0">
-                                        Jovanni L. (PHP Developer)
-                                        <small class="m-0 fw-300">
-                                            Partner &amp; Contributor
-                                        </small>
-                                    </h5>
-                                    <a href="https://twitter.com/@lodev09" class="text-info fs-sm" target="_blank">@lodev09</a> -
-                                    <a href="https://wrapbootstrap.com/user/lodev09" class="text-info fs-sm" target="_blank" title="Contact Jovanni"><i class="fal fa-envelope"></i></a>
-                                </div>
-                            </div> -->
-                            <!-- <div class="banned rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                                <img src="img/demo/authors/roberto.png" alt="Jovanni Lo" class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                                <div class="ml-2 mr-3">
-                                    <h5 class="m-0">
-                                        Roberto R. (Rails Developer)
-                                        <small class="m-0 fw-300">
-                                            Partner &amp; Contributor
-                                        </small>
-                                    </h5>
-                                    <a href="https://twitter.com/@sildur" class="text-info fs-sm" target="_blank">@sildur</a> -
-                                    <a href="https://wrapbootstrap.com/user/sildur" class="text-info fs-sm" target="_blank" title="Contact Roberto"><i class="fal fa-envelope"></i></a>
-                                </div>
-                            </div> -->
-                        </div>
+                                            <div class="<?php if($result['banned']  == 'on'){echo "banned";} ?> rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
+                                                <img src="<?php echo $result['avatar']; ?>" alt="<?php echo $result['alt']; ?>" class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
+                                                <div class="ml-2 mr-3">
+                                                    <h5 class="m-0">
+                                                        <?php echo $result['name']." ".$result['surname']; ?>. <?php echo $result['skill']; ?>
+                                                        <small class="m-0 fw-300">
+                                                            <?php echo $result['position']; ?>
+                                                        </small>
+                                                    </h5>
+                                                    <a href="<?php echo $result['link_twittwer']; ?>" class="text-info fs-sm" target="_blank"><?php echo $result['twitter']; ?></a> -
+                                                    <a href="<?php echo $result['link_email']; ?>" class="text-info fs-sm" target="_blank" title="Contact Sunny"><?php echo $result['email']; ?></a>
+                                                </div>
+                                            </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
