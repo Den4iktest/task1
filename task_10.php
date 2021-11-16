@@ -1,10 +1,5 @@
 <?php
-$db = mysqli_connect('localhost','root','','marlin');
-    if($db == false){
-        echo 'no connect!<br>';
-        echo mysqli_connect_error();
-        exit();
-    }
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,13 +37,22 @@ $db = mysqli_connect('localhost','root','','marlin');
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <div class="alert alert-danger fade show" role="alert">
-                                        You should check in on some of those fields below.
-                                    </div>
-                                    <form action="create.php" method="POST">
+                                    <?php if(isset($_SESSION['danger'])):?>
+                                        <div class="alert alert-danger fade show" role="alert">
+                                            <?php echo $_SESSION['danger']; unset($_SESSION['danger']); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if(isset($_SESSION['success'])):?>
+                                        <div class="alert alert-success fade show" role="alert">
+                                            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <form action="task10_save.php" method="POST">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
-                                        <button class="btn btn-success mt-3">Submit</button>
+                                        <input type="text" required id="simpleinput" class="form-control" name="text">
+                                        <button type="submit" class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>
                             </div>
@@ -69,3 +73,5 @@ $db = mysqli_connect('localhost','root','','marlin');
         </script>
     </body>
 </html>
+
+

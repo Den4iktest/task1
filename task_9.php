@@ -43,19 +43,15 @@ $db = mysqli_connect('localhost','root','','marlin');
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <form action="task_9.php" method="POST">
+                                    <form action="task9_save.php" method="POST">
                                         <label class="form-label" for="simpleinput">Text</label>
                                         <input type="text" id="simpleinput" class="form-control" name="text">
-                                        <button class="btn btn-success mt-3">Submit</button>
+                                        <button class="btn btn-success mt-3" type="submit">Submit</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php
-                    $text = $_POST['text'];
-                    mysqli_query($db,"INSERT INTO `task1_9` (`id`, `text`) VALUES (NULL, '$text')");
-                    ?>
                 </div>
             </div>
         </main>
