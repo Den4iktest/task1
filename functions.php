@@ -75,4 +75,11 @@ function get_users()
  
      return $statement -> fetchAll(PDO::FETCH_ASSOC);
 }
+
+function add_user($email, $password){
+    $pdo = new PDO("mysql:host=localhost;dbname=marlin;",'root','');
+    $sql = "INSERT INTO test_user (email, password) VALUES (:email, :password)";
+    $statement = $pdo -> prepare($sql);
+    $statement -> execute(['email' => $email, 'password' => password_hash($password,PASSWORD_DEFAULT)]);
+}
 ?>
