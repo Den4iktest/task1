@@ -151,7 +151,7 @@ include('functions.php');
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0 " name="vk">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -165,7 +165,7 @@ include('functions.php');
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="telegram">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -179,7 +179,7 @@ include('functions.php');
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="instagram">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">
