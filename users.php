@@ -1,11 +1,9 @@
 <?php
 session_start();
 include('functions.php');
-is_not_loogged_in();
 if(is_not_logged_in()){
     redirect_to('page_login');
 }
-$user = $_SESSION['user'];
 $users = get_users();
 ?>
 
@@ -47,9 +45,16 @@ $users = get_users();
         </nav>
 
         <main id="js-page-content" role="main" class="page-content mt-3">
-            <div class="alert alert-success">
-                Профиль успешно обновлен.
-            </div>
+            <?php if(isset($_SESSION['danger'])):?>
+                <div class="alert alert-danger">
+                    <?php echo $_SESSION['danger']; unset($_SESSION['danger']); ?>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($_SESSION['success'])):?>
+                <div class="alert alert-success">
+                    <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                </div>
+            <?php endif; ?>
             <div class="subheader">
                 <h1 class="subheader-title">
                     <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -57,8 +62,8 @@ $users = get_users();
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <?php if(isset($user['role']) == 1) : ?>
-                        <a class="btn btn-success" href="create_user.html">Добавить</a>
+                    <?php if(isset($_SESSION['user']['role']) == 1) : ?>
+                        <a class="btn btn-success" href="create_user.php">Добавить</a>
                     <?php endif; ?>  
                     <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                         <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
@@ -81,7 +86,7 @@ $users = get_users();
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
                                 <span class="status status-success mr-3">
-                                    <span class="rounded-circle profile-image d-block " style="background-image:<?php echo $user['avatar']?> background-size: cover;"></span>
+                                    <span class="rounded-circle profile-image d-block " style="background-image:url('img/demo/avatars/<?php echo isset($user['avatar'])? $user['avatar']:"no_image.png";?>'); background-size: cover;"></span>
                                 </span>
                                 <div class="info-card-text flex-1">
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
@@ -89,25 +94,25 @@ $users = get_users();
                                         <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
                                         <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="edit.html">
-                                            <i class="fa fa-edit"></i>
-                                        Редактировать</a>
-                                        <a class="dropdown-item" href="security.html">
-                                            <i class="fa fa-lock"></i>
-                                        Безопасность</a>
-                                        <a class="dropdown-item" href="status.html">
-                                            <i class="fa fa-sun"></i>
-                                        Установить статус</a>
-                                        <a class="dropdown-item" href="media.html">
-                                            <i class="fa fa-camera"></i>
-                                            Загрузить аватар
-                                        </a>
-                                        <a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
-                                            <i class="fa fa-window-close"></i>
-                                            Удалить
-                                        </a>
-                                    </div>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="edit.php?id=<?php echo $user['id'];?>">
+                                                <i class="fa fa-edit"></i>
+                                            Редактировать</a>
+                                            <a class="dropdown-item" href="security.php?id=<?php echo $user['id'];?>">
+                                                <i class="fa fa-lock"></i>
+                                            Безопасность</a>
+                                            <a class="dropdown-item" href="status.php?id=<?php echo $user['id'];?>">
+                                                <i class="fa fa-sun"></i>
+                                            Установить статус</a>
+                                            <a class="dropdown-item" href="media.php?id=<?php echo $user['id'];?>">
+                                                <i class="fa fa-camera"></i>
+                                                Загрузить аватар
+                                            </a>
+                                            <a href="delete_user.php?id=<?php echo $user['id'];?>" class="dropdown-item" onclick="return confirm('are you sure?');">
+                                                <i class="fa fa-window-close"></i>
+                                                Удалить
+                                            </a>
+                                        </div>
                                     <span class="text-truncate text-truncate-xl"><?php echo $user['job']?></span>
                                 </div>
                                 <button class="js-expand-btn btn btn-sm btn-default d-none" data-toggle="collapse" data-target="#c_1 > .card-body + .card-body" aria-expanded="false">
@@ -120,6 +125,9 @@ $users = get_users();
                             <div class="p-3">
                                 <a href="tel:<?php echo $user['phone']?>" class="mt-1 d-block fs-sm fw-400 text-dark">
                                     <i class="fas fa-mobile-alt text-muted mr-2"></i> <?php echo $user['phone']?></a>
+                                <?php if($user['status'] == 'onlain'){echo "<p>status-success</p>";}?>
+                                <?php if($user['status'] == 'departed'){echo "<p>status-warning</p>";}?>
+                                <?php if($user['status'] == 'off'){echo "<p>status-danger</p>";}?>
                                 <a href="mailto:<?php echo $user['email']?>" class="mt-1 d-block fs-sm fw-400 text-dark">
                                     <i class="fas fa-mouse-pointer text-muted mr-2"></i> <?php echo $user['email']?></a>
                                 <address class="fs-sm fw-400 mt-4 text-muted">

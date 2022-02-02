@@ -1,8 +1,19 @@
+<?php
+session_start();
+include('functions.php');
+if(is_not_logged_in()){
+    redirect_to('page_login');
+}
+$id_user = $_GET['id'];
+$id = get_user_by_id($id_user);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Безопаность</title>
     <meta name="description" content="Chartist.html">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
@@ -34,47 +45,45 @@
     <main id="js-page-content" role="main" class="page-content mt-3">
         <div class="subheader">
             <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
+                <i class='subheader-icon fal fa-lock'></i> Безопасность
             </h1>
 
         </div>
-        <form action="">
+        <form action="security_user.php" method="POST">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
                         <div class="panel-container">
                             <div class="panel-hdr">
-                                <h2>Общая информация</h2>
+                                <h2>Обновление эл. адреса и пароля</h2>
                             </div>
                             <div class="panel-content">
-                                <!-- username -->
+                                <!-- email -->
                                 <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Имя</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Иван иванов">
+                                    <input type="text" hidden value="<?php echo $id['id'];?>" name="id">
+                                    <label class="form-label" for="simpleinput">Email</label>
+                                    <input type="text" id="simpleinput" class="form-control" value="<?php echo $id['email'];?>" name="email">
                                 </div>
 
-                                <!-- title -->
+                                <!-- password -->
                                 <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Место работы</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Marlin Веб-разработчик">
+                                    <label class="form-label" for="simpleinput">Пароль</label>
+                                    <input type="password" required id="simpleinput" class="form-control" name="password">
                                 </div>
 
-                                <!-- tel -->
+                                <!-- password confirmation-->
                                 <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Номер телефона</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="8 888 8888 88">
+                                    <label class="form-label" for="simpleinput">Подтверждение пароля</label>
+                                    <input type="password" id="simpleinput" class="form-control" name="password2">
                                 </div>
 
-                                <!-- address -->
-                                <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Адрес</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Восточные Королевства, Штормград">
-                                </div>
+
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Редактировать</button>
+                                    <button class="btn btn-warning">Изменить</button>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
